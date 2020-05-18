@@ -14,8 +14,17 @@
 6. $ cd imagefix && pip install -r requirements.txt
 
 ## Branching Conventions
-
-The different types of branches we will be using are:
-  - Feature branches (branch name should be like - feat/image-to-pdf)
-  - Bug branches (branch name should be like - bug/image-download)
-  - Hotfix branches (branch name should be like - hot/image-spelling)
+   
+    Branch name should follow:
+    - username/token/branch-name-by-hyphen
+    WHERE
+    1. username - your username
+    
+    2. token 
+      feat - A feature branch (
+      hotfix - Hotfix changes for production issues
+      bugfix - A bugfix branch
+      chore - Cleaning up / organizing the code
+     
+     3. branch-name-by-hyphen - name of the branch
+     
