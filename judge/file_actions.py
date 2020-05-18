@@ -67,6 +67,5 @@ class ChangeFormat:
         
     def get_processed_filename(self, image):
         head, tail = os.path.split(image.url)
-        print(tail.split('.')[0] + self.dest_format)
         return tail.split('.')[0] + '.' + self.dest_format.lower()
 
