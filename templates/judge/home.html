@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Crop|Resize|Change Format|Image to Pdf{% endblock %}
+
+{% block content %}
+
+
+<div class="card-columns">
+    <div class="card bg-default text-center">
+        <a href='/crop-image/'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-crop"></i>
+                <h4 class="card-title">Crop Image</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='/change-format/'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-exchange-alt"></i>
+                <h4 class="card-title">Change Format</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='/create-name-dob/'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-plus"></i>
+                <h4 class="card-title">Add Name|DOB</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='#'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-image"></i> <sub>In Development</sub>
+                <h4 class="card-title">Image to Pdf</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='#'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-map-pin"></i> <sub>In Development</sub>
+                <h4 class="card-title">Crop by Pixel</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='#'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-compress"></i> <sub>In Development</sub>
+                <h4 class="card-title">Compress Image</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='#'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-bug"></i> <sub>In Development</sub>
+                <h4 class="card-title">Report Bug</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='#'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-user-ninja"></i> <sub>In Development</sub>
+                <h4 class="card-title">Suggestions</h4>
+            </div>
+        </a>
+    </div>
+    <div class="card bg-default text-center">
+        <a href='#'>
+            <div class="card-body">
+                <br>
+                <i class="fas fa-key"></i> <sub>In Development</sub>
+                <h4 class="card-title">Privacy Policy</h4>
+            </div>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

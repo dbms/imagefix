@@ -1,0 +1,21 @@
+# django migrations 
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+# media directoried
+media/
+
+# DB
+*.sqlite3
+
+
+# code editor files
+.vscode
+
+# Django stuff:
+*.log
+local_settings.py
+
+# Byte-compiled
+__pycache__/
