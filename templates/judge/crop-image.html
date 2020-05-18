@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Crop Image Free: ImageFix {% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+        <form method="POST" enctype="multipart/form-data" id="id_form_crop_image">
+            <img id="id_image_preview" src="{% static 'judge/default-avatar.png' %}" alt="" class="img-thumbnail"
+                style="max-height: 500px; overflow: auto;" />
+            <br><br>
+            {% csrf_token %}
+            {{form|crispy}}
+            {% if form.instance.processed_img %}
+            <div class="form-group" style="width: 25%;">
+                <button class="btn btn-success btn-block" type="submit">
+
+                    <a href="{{form.instance.processed_img.url}}" download>Download</a>
+                </button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+    <div class="col-12 col-md-4" style="vertical-align: top;">
+        Advertisement Here
+    </div>
+</div>
+
+<div class="modal fade" id="modalCrop">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Crop the photo</h4>
+            </div>
+            <div class="modal-body">
+                <img src="" id="id_modal_image" style="max-width: 100%;">
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group pull-left" role="group">
+                    <button type="button" class="btn btn-default js-zoom-in">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-default js-zoom-out">
+                        <i class="fas fa-search-minus"></i>
+
+                    </button>
+                </div>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success js-crop-and-upload">Crop</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="https://unpkg.com/cropperjs/dist/cropper.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css" crossorigin="anonymous">
+<script type="text/javascript" src="https://fengyuanchen.github.io/jquery-cropper/js/jquery-cropper.js"></script>
+
+<script>
+    $(function () {
+
+        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+        $("#id_processed_img").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#id_modal_image").attr("src", e.target.result);
+                    $("#modalCrop").modal("show");
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        var $image = $("#id_modal_image");
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop").on("shown.bs.modal", function () {
+            $image.cropper({
+                viewMode: 1,
+                minCropBoxWidth: 200,
+                minCropBoxHeight: 200,
+                ready: function () {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });
+        }).on("hidden.bs.modal", function () {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+        });
+
+        // Enable zoom in button
+        $(".js-zoom-in").click(function () {
+            $image.cropper("zoom", 0.1);
+        });
+
+        // Enable zoom out button
+        $(".js-zoom-out").click(function () {
+            $image.cropper("zoom", -0.1);
+        });
+        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+        $(".js-crop-and-upload").click(function () {
+            var cropData = $image.cropper("getData");
+            $("#id_x").val(cropData["x"]);
+            $("#id_y").val(cropData["y"]);
+            $("#id_height").val(cropData["height"]);
+            $("#id_width").val(cropData["width"]);
+            $("#id_form_crop_image").submit();
+        });
+
+    });
+
+    {% if form.instance.processed_img %}
+    $('#id_image_preview').attr('src', '{{form.instance.processed_img.url}}');
+    {% endif %}
+
+</script>
+{% endblock %}
