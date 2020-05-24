@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Contact : Imagefix.in {% endblock %}
+
+{% block content %}
+<div class="card-columns">
+    <div class="card bg-default">
+        <div class="card-body text-left">
+            <img id="id_image_preview" src="{% static 'judge/default-avatar.png' %}" alt="" class="img-thumbnail" />
+            <br><br>
+            If you have any
+            <ul>
+                <li>Question</li>
+                <li>Comment</li>
+                <li>Suggestion</li>
+                <li>Report Bug</li>
+            </ul>
+            Email us at <b>imagefix.in@gmail.com</b> or use the form to contact us.
+            <br><br>
+            {% if messages %}
+            {% for message in messages %} {% if message.tags == 'success' %}
+                <div class="alert alert-success">
+                    <strong>{{ message }}</strong>
+                </div>
+                {% else %}
+                <div class="alert alert-danger">
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="card bg-default">
+        <div class="card-body text-left">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="form-group text-center">
+                    <button class="btn btn-success" type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -43,15 +43,21 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/crop-image/">
+                    <a href="/resize-by-pixel/">
                         <i class="fas fa-arrow-right"></i>
-                        Crop Image
+                        Resize by Pixels
                     </a>
                 </li>
                 <li>
-                    <a href="/change-format/">
+                    <a href="/compress-image/">
                         <i class="fas fa-arrow-right"></i>
-                        Change Format
+                        Compress Image
+                    </a>
+                </li>
+                <li>
+                    <a href="/crop-image/">
+                        <i class="fas fa-arrow-right"></i>
+                        Crop Image
                     </a>
                 </li>
                 <li>
@@ -61,37 +67,31 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/image-to-pdf/">
                         <i class="fas fa-arrow-right"></i>
                         Image to Pdf
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/change-format/">
                         <i class="fas fa-arrow-right"></i>
-                        Crop by Pixel
+                        Change Format
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fas fa-arrow-right"></i>
-                        Change Image Size
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="/contact-us/">
                         <i class="fas fa-arrow-right"></i>
                         Report Bug
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/contact-us/">
                         <i class="fas fa-arrow-right"></i>
                         Request Feature
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/privacy-policy/">
                         <i class="fas fa-arrow-right"></i>
                         Privacy Policy
                     </a>
@@ -110,7 +110,9 @@
                 </div>
             </nav>
             <div class="container-fluid">
-                {% block content %} {% endblock %}
+                <div class="container-fluid" style="background: #fafafa;padding: 10px; border-radius: 2px;">
+                    {% block content %} {% endblock %}
+                </div>
             </div>
         </div>
     </div>

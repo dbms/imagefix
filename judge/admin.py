@@ -1,7 +1,12 @@
 from django.contrib import admin
-from judge.models import WriteOnImageModel, ChangeFormatModel, CropImageModel
+import judge.models as models
 
-admin.site.register(WriteOnImageModel)
-admin.site.register(ChangeFormatModel)
-admin.site.register(CropImageModel)
+admin.site.register(models.WriteOnImageModel)
+admin.site.register(models.ChangeFormatModel)
+admin.site.register(models.CropImageModel)
+admin.site.register(models.PrivacyPolicyModel)
+admin.site.register(models.ContactModel)
+admin.site.register(models.ImagePdfModel)
+admin.site.register(models.ResizeByPixelModel)
+admin.site.register(models.CompressImageModel)
 

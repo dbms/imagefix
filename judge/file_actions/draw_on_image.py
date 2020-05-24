@@ -8,6 +8,7 @@ from judge.choices import PATH_TO_FONT
 from main.settings import BASE_DIR, MEDIA_ROOT
 
 
+
 class DrawOnImage:
     def __init__(self, name, dob):
         self.name = name.title()
@@ -22,6 +23,7 @@ class DrawOnImage:
         if im.mode in ("RGBA", "P"):
             im = im.convert("RGB")
         
+        original_file_format = im.format
         self.draw = ImageDraw.Draw(im)
         
         self.width, self.height = im.size 
@@ -32,7 +34,7 @@ class DrawOnImage:
         self.draw_text(self.get_dob_coordinates(), self.dob)
 
         thumb_io = BytesIO()
-        im.save(thumb_io, 'JPEG') # If a file object is used instead of filename, this parameter should always be used. 
+        im.save(thumb_io, original_file_format) # If a file object is used instead of filename, this parameter should always be used. 
         processed_img = File(thumb_io, name=image.name) # saving the file with same name
         return processed_img
 
@@ -49,23 +51,3 @@ class DrawOnImage:
     def get_dob_coordinates(self):
         w, h = self.draw.textsize(self.dob, font=self.font)
         return ((self.width-w)/2, self.height - self.fillsize + 50)
-
-
-class ChangeFormat:
-    def __init__(self, dest_format):
-        self.dest_format = dest_format
-    
-    def change_format(self, image):
-        im = Image.open(image)
-        if im.mode != 'RGB':
-            im = im.convert("RGB")
-
-        thumb_io = BytesIO()
-        im.save(thumb_io, self.dest_format, quality=95)
-        processed_img = File(thumb_io, name=self.get_processed_filename(image))       
-        return processed_img
-        
-    def get_processed_filename(self, image):
-        head, tail = os.path.split(image.url)
-        return tail.split('.')[0] + '.' + self.dest_format.lower()
-

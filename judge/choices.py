@@ -12,3 +12,9 @@ IMAGE_FORMATS = (
     ('PNG', 'PNG'),
     ('TIFF', 'TIFF'),
 )
+
+CONTACT_REASON = (
+    ('Suggestion', 'Suggestion'),    
+    ('Report Bug', 'Report Bug'),
+    ('Comment', 'Comment'),
+)

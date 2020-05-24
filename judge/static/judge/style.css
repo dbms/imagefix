@@ -264,6 +264,10 @@ a.article:hover {
 .card-body{
     padding: 5px;
 }
+.card-columns .card {
+    padding: 10px;
+}
+
 .btn-info, .btn-info:hover, .btn-info:visited{
     background-color:#29387c;
     border-color: #fafafa;

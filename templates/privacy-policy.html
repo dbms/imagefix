@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Privacy Policy - Imagefix.in{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid bg-light" style="border-radius: 2px;padding: 10px;">
+    {% for object in object_list %}
+    {{ object.content|safe }}
+    {% endfor %}
+
+</div>
+{% endblock %}

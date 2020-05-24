@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Resize Image Pixels(height, width) {% endblock %}
+
+{% block content %}
+
+<div class="card-columns">
+    <div class="card bg-default">
+        <div class="card-body text-left">
+            <img id="id_image_preview" src="{% static 'judge/default-avatar.png' %}" alt="" class="img-thumbnail" />
+        </div>
+    </div>
+    <div class="card bg-default">
+        <div class="card-body text-left">
+            <div class="form-group text-left">
+                <div class="alert alert-success">
+                    <strong>Select Image | Enter Width-Height</strong>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button class="btn btn-success" type="submit">Resize</button>
+                </form>                
+                {% if form.instance.processed_img %}
+                <hr>
+                <b>Input Image Details :</b>
+                <table class="table table-bordered text-left">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Width</th>
+                            <th>Height</th>
+                            <th>Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{form.instance.inp_format}}</td>
+                            <td>{{form.instance.inp_width}} px</td>
+                            <td>{{form.instance.inp_height}} px</td>
+                            <td>{{form.instance.inp_size}} kB</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if form.instance.processed_img %}
+    <div class="card bg-default">
+        <div class="card-body text-center">
+            <img id="id_image_preview" src="{{form.instance.processed_img.url}}" alt="" class="img-thumbnail" />
+            <br>
+            <a href="{{form.instance.processed_img.url}}" download>
+                <button class="btn btn-success">Download</button>
+            </a>
+            <br><br>
+            <b>Output Image Details :</b>
+            <table class="table table-bordered  text-left">
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Width</th>
+                        <th>Height</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{form.instance.out_format}}</td>
+                        <td>{{form.instance.out_width}} px</td>
+                        <td>{{form.instance.out_height}} px</td>
+                        <td>{{form.instance.out_size}} kB</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<b>Enter text here Enter text here Enter text here Enter text here Enter text here Enter text here 
+    Enter text here Enter text here Enter text here Enter text here Enter text here Enter text here 
+    Enter text here Enter text here Enter text here Enter text here Enter text here Enter text here 
+    Enter text here Enter text here Enter text here Enter text here Enter text here 
+    Enter text here Enter text here Enter text here Enter text here 
+</b>
+
+{% endblock %}
+
+{% block footer %}
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#id_image_preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#id_raw_img").change(function () {
+        readURL(this);
+    });
+
+    {% if form.instance.raw_img %}
+    $('#id_image_preview').attr('src', '{{form.instance.raw_img.url}}');
+    {% endif %}
+</script>
+{% endblock %}

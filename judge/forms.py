@@ -4,17 +4,16 @@ from django.forms import ModelForm
 from django import forms
 from django.core.files import File
 
-from judge.models import WriteOnImageModel, ChangeFormatModel, CropImageModel
+import judge.models as models
 from judge.choices import DATE_INPUT_FORMATS
 
 
 class JudgeForm(ModelForm):
     
     class Meta:
-        model = WriteOnImageModel
+        model = models.WriteOnImageModel
         fields = ['raw_img', 'name']
         
-
 
 class NameDOBForm(ModelForm):
     
@@ -24,7 +23,7 @@ class NameDOBForm(ModelForm):
     )
 
     class Meta:
-        model = WriteOnImageModel
+        model = models.WriteOnImageModel
         fields = ['raw_img', 'name', 'dob']
         labels = {
             'raw_img': '',
@@ -35,7 +34,7 @@ class NameDOBForm(ModelForm):
 class ChangeFormatForm(ModelForm):
     
     class Meta:
-        model = ChangeFormatModel
+        model = models.ChangeFormatModel
         fields = ['raw_img', 'dest_format']
         labels = {
             'raw_img': '',
@@ -49,7 +48,7 @@ class CropImageForm(ModelForm):
     height = forms.FloatField(widget=forms.HiddenInput())
 
     class Meta:
-        model = CropImageModel
+        model = models.CropImageModel
         fields = ('processed_img', 'x', 'y', 'width', 'height', )
         labels = {
             'processed_img': '',
@@ -70,3 +69,43 @@ class CropImageForm(ModelForm):
         cropped_image.save(photo.processed_img.path)
 
         return photo
+
+class ImageToPdfForm(ModelForm):
+    upload_images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    class Meta:
+        model = models.ImagePdfModel
+        fields = ['upload_images',]        
+
+class ResizeByPixelForm(ModelForm):
+    
+    class Meta:
+        model = models.ResizeByPixelModel
+        fields = ['raw_img', 'out_width', 'out_height']
+        labels = {
+            'raw_img': '',
+            'out_height': 'Height(px)',
+            'out_width': 'Width(px)'
+        }
+
+class CompressImageForm(ModelForm):
+    
+    class Meta:
+        model = models.CompressImageModel
+        fields = ['raw_img', 'min_size', 'max_size']
+        labels = {
+            'raw_img': '',
+            'min_size': 'Minimum Size(kB)',
+            'max_size': 'Maximum Size(kB)'
+        }
+
+class ContactForm(ModelForm):
+    
+    class Meta:
+        model = models.ContactModel
+        fields = ['reason', 'email', 'message', 'attach_screenshot']
+        labels = {
+            'attach_screenshot': 'Attach Screenshot',
+        }
+        widgets = {
+          'message': forms.Textarea(attrs={'rows':4}),
+        }
