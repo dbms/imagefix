@@ -21,7 +21,7 @@
                     {% csrf_token %}
                     {{form|crispy}}
                     <button class="btn btn-success" type="submit">Resize</button>
-                </form>                
+                </form>
                 {% if form.instance.processed_img %}
                 <hr>
                 <b>Input Image Details :</b>
@@ -79,13 +79,15 @@
     </div>
     {% endif %}
 </div>
-<b>Enter text here Enter text here Enter text here Enter text here Enter text here Enter text here 
-    Enter text here Enter text here Enter text here Enter text here Enter text here Enter text here 
-    Enter text here Enter text here Enter text here Enter text here Enter text here Enter text here 
-    Enter text here Enter text here Enter text here Enter text here Enter text here 
-    Enter text here Enter text here Enter text here Enter text here 
-</b>
-
+<b>How to Resize by Pixels</b>
+<br>
+<ul>
+    <li>Select the image : Image can of any format JPEG, JPG, PNG.</li>
+    <li>Enter width and height in pixels.</li>
+    <li>Click Resize and wait for the system to process it.</li>
+    <li>Processed image with sepcified pixels will be visible in the right panel.</li>
+    <li>Click Download.</li>
+</ul>
 {% endblock %}
 
 {% block footer %}

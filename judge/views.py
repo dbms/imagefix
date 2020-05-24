@@ -20,18 +20,18 @@ class NameDOBCreateView(generic.CreateView):
 
     def form_valid(self, form):
         saved_instance = form.save()
-        return redirect(reverse('update_name_dob', args=(saved_instance.id,)))
+        return redirect(reverse('update_name_dob', args=(saved_instance.uuid,)))
 
 
 class NameDOBUpdateView(generic.UpdateView):
     model = models.WriteOnImageModel
     template_name = 'judge/add-name-dob.html'
     form_class = forms.NameDOBForm
-    pk_url_kwarg = 'id'
+    pk_url_kwarg = 'uuid'
 
     def form_valid(self, form):
         saved_instance = form.save()
-        return redirect(reverse('update_name_dob', args=(saved_instance.id,)))
+        return redirect(reverse('update_name_dob', args=(saved_instance.uuid,)))
 
 
 
@@ -62,18 +62,18 @@ class CropImageCreateView(generic.CreateView):
 
     def form_valid(self, form):
         saved_instance = form.save()
-        return redirect(reverse('update_crop_image', args=(saved_instance.id,)))
+        return redirect(reverse('update_crop_image', args=(saved_instance.uuid,)))
 
 
 class CropImageUpdateView(generic.UpdateView):
     model = models.CropImageModel
     template_name = 'judge/crop-image.html'
     form_class = forms.CropImageForm
-    pk_url_kwarg = 'id'
+    pk_url_kwarg = 'uuid'
 
     def form_valid(self, form):
         saved_instance = form.save()
-        return redirect(reverse('update_crop_image', args=(saved_instance.id,)))
+        return redirect(reverse('update_crop_image', args=(saved_instance.uuid,)))
 
 '''
 Create pdf from the images uploaded by the user

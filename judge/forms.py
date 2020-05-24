@@ -65,9 +65,10 @@ class CropImageForm(ModelForm):
         if im.mode != 'RGB':
             im = im.convert("RGB")
         cropped_image = im.crop((x, y, w+x, h+y))
-        # resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
         cropped_image.save(photo.processed_img.path)
-
+        photo.out_width = int(w-x)
+        photo.out_height = int(h-y)
+        
         return photo
 
 class ImageToPdfForm(ModelForm):
@@ -102,7 +103,7 @@ class ContactForm(ModelForm):
     
     class Meta:
         model = models.ContactModel
-        fields = ['reason', 'email', 'message', 'attach_screenshot']
+        fields = ['reason', 'email', 'mobile', 'message', 'attach_screenshot']
         labels = {
             'attach_screenshot': 'Attach Screenshot',
         }
