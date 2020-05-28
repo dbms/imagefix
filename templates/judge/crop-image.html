@@ -139,10 +139,8 @@
 
     });
 
-    { %
-        if form.instance.processed_img %
-    }
-    $('#id_image_preview').attr('src', '{{form.instance.processed_img.url}}'); { % endif %
-    }
+    {% if form.instance.processed_img %}
+        $('#id_image_preview').attr('src', '{{form.instance.processed_img.url}}'); 
+    {% endif %}
 </script>
 {% endblock %}

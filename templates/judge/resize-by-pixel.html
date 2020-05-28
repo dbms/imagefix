@@ -101,10 +101,8 @@
         readURL(this);
     });
 
-    { %
-        if form.instance.raw_img %
-    }
-    $('#id_image_preview').attr('src', '{{form.instance.raw_img.url}}'); { % endif %
-    }
+    {% if form.instance.raw_img %}
+    $('#id_image_preview').attr('src', '{{form.instance.raw_img.url}}');
+    {% endif %}
 </script>
 {% endblock %}
