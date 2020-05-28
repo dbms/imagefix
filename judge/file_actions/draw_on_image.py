@@ -34,7 +34,7 @@ class DrawOnImage:
         self.draw_text(self.get_dob_coordinates(), self.dob)
 
         thumb_io = BytesIO()
-        im.save(thumb_io, original_file_format) # If a file object is used instead of filename, this parameter should always be used. 
+        im.save(thumb_io, 'JPEG')
         processed_img = File(thumb_io, name=image.name) # saving the file with same name
         return processed_img
 

@@ -2,7 +2,9 @@
     DEMO STYLE
 */
 
+
 /* @import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"; */
+
 body {
     font-family: 'Roboto', sans-serif;
     background-repeat: no-repeat;
@@ -53,6 +55,7 @@ i,
 span {
     display: inline-block;
 }
+
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -117,7 +120,7 @@ span {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 7px;
     /* background: #1C2833; */
     color: #fafafa;
     font-weight: bolder;
@@ -139,7 +142,6 @@ span {
     font-weight: bolder;
     display: block;
 }
-
 
 #sidebar ul li a:hover {
     color: #fafafa;
@@ -198,6 +200,7 @@ a.article:hover {
     color: #1C2833 !important;
 }
 
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -207,6 +210,7 @@ a.article:hover {
     min-height: 100vh;
     transition: all 0.3s;
 }
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -261,25 +265,30 @@ a.article:hover {
     }
 }
 
-.card-body{
+.card-body {
     padding: 5px;
 }
+
 .card-columns .card {
     padding: 10px;
 }
 
-.btn-info, .btn-info:hover, .btn-info:visited{
-    background-color:#29387c;
-    border-color: #fafafa;
-    font-weight: bold;
-}
-.btn-success, .btn-success:hover, .btn-success:visited{
-    background-color:#29387c;
+.btn-info,
+.btn-info:hover,
+.btn-info:visited {
+    background-color: #29387c;
     border-color: #fafafa;
     font-weight: bold;
 }
 
+.btn-success,
+.btn-success:hover,
+.btn-success:visited {
+    background-color: #29387c;
+    border-color: #fafafa;
+    font-weight: bold;
+}
 
-.img-thumbnail{
+.img-thumbnail {
     border: 0;
 }

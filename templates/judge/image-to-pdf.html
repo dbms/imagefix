@@ -1,22 +1,18 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block title %} Convert Images to pdf : ImageFix {% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %} Convert Images to pdf : ImageFix {% endblock %} {% block head %}
+<meta name="description" content="Select mulitple images and convert them into a nice pdf." />
+<meta name="keywords" content="change images to pdf, image to pdf, photo to pdf, free pdf conversion" /> {% endblock %} {% block content %}
 <div class="row" style="background: #fafafa; margin: 10px;border-radius: 2px; padding: 10px 0px;">
     <div class="col-sm-4">
         <form method="POST" enctype="multipart/form-data">
             <div id="display_images" style="max-height: 500px; overflow: auto;">
                 <img id="id_image_preview" src="{% static 'judge/default-avatar.png' %}" alt="" class="img-thumbnail" />
             </div>
-            {% csrf_token %}
-            {{form|crispy}}
+            {% csrf_token %} {{form|crispy}}
             <div class="form-group text-left">
                 <button class="btn btn-success" type="submit">Convert</button>
             </div>
             {% if processed_pdf_path %}
-            <a href="{{processed_pdf_path}}"  download target="_blank">
+            <a href="{{processed_pdf_path}}" download target="_blank">
                 <span class="btn btn-success">Download</span>
             </a>
             {% endif %}
@@ -24,21 +20,17 @@
 
     </div>
     <div class="col-sm-8">
-        <div class="embed-responsive">
-            <embed src="https://drive.google.com/viewerng/
-            viewer?embedded=true&url=http://example.com/the.pdf" type="application/pdf" class="embed-responsive-item" />
+        <div class="embed-responsive" style="position: unset;">
+            <embed src="{{processed_pdf_path}}" type="application/pdf" class="embed-responsive-item" />
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block footer %}
+{% endblock %} {% block footer %}
 <script>
-
-    window.onload = function () {
+    window.onload = function() {
         if (window.File && window.FileList && window.FileReader) {
             var filesInput = document.getElementById('id_upload_images');
-            filesInput.addEventListener('change', function (event) {
+            filesInput.addEventListener('change', function(event) {
                 var files = event.target.files;
                 var output = document.getElementById('display_images');
                 for (var i = 0; i < files.length; i++) {
@@ -46,7 +38,7 @@
                     if (!file.type.match('image'))
                         continue;
                     var picReader = new FileReader();
-                    picReader.addEventListener('load', function (event) {
+                    picReader.addEventListener('load', function(event) {
                         var picFile = event.target;
                         var div = document.createElement('div');
                         div.innerHTML = "<img class='img-thumbnail' src='" + picFile.result + "'/>";
@@ -56,11 +48,9 @@
                     $('#id_image_preview').remove();
                 }
             });
-        }
-        else {
+        } else {
             console.log('Your browser does not support File API');
         }
     }
-
 </script>
 {% endblock %}

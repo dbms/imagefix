@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block title %} Resize Image Pixels(height, width) {% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %} Resize Image Pixels(height, width) : Imagefix {% endblock %} {% block head %}
+<meta name="description" content="Here, you can specify the output height & width of the image/photo and the image in desired size." />
+<meta name="keywords" content="change image height, change image width, free image resize, compress photo height, compress photo width" /> {% endblock %} {% block content %}
 
 <div class="card-columns">
     <div class="card bg-default">
@@ -18,8 +15,7 @@
                     <strong>Select Image | Enter Width-Height</strong>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form|crispy}}
+                    {% csrf_token %} {{form|crispy}}
                     <button class="btn btn-success" type="submit">Resize</button>
                 </form>
                 {% if form.instance.processed_img %}
@@ -88,27 +84,27 @@
     <li>Processed image with sepcified pixels will be visible in the right panel.</li>
     <li>Click Download.</li>
 </ul>
-{% endblock %}
-
-{% block footer %}
+{% endblock %} {% block footer %}
 <script>
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 $('#id_image_preview').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    $("#id_raw_img").change(function () {
+    $("#id_raw_img").change(function() {
         readURL(this);
     });
 
-    {% if form.instance.raw_img %}
-    $('#id_image_preview').attr('src', '{{form.instance.raw_img.url}}');
-    {% endif %}
+    { %
+        if form.instance.raw_img %
+    }
+    $('#id_image_preview').attr('src', '{{form.instance.raw_img.url}}'); { % endif %
+    }
 </script>
 {% endblock %}
