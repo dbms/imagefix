@@ -16,6 +16,8 @@ media/
 # Django stuff:
 *.log
 local_settings.py
+main/secret_settings.py
 
 # Byte-compiled
 __pycache__/
+
